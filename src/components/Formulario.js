@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import Error from "./Error";
 import shortid from "shortid";
 
-const Formulario = ({ agregarNuevoGasto }) => {
+const Formulario = ({ guardarGasto, guardarCrearGasto }) => {
   const [nombre, guardarNombre] = useState("");
   const [cantidad, guardarCantidad] = useState(0);
   const [error, guardarError] = useState(false);
@@ -27,7 +29,8 @@ const Formulario = ({ agregarNuevoGasto }) => {
     console.log(gasto);
 
     //pasar el gasto al componente principal
-    agregarNuevoGasto(gasto);
+    guardarGasto(gasto);
+    guardarCrearGasto(true);
 
     //resetear el form
     guardarNombre("");
@@ -69,6 +72,11 @@ const Formulario = ({ agregarNuevoGasto }) => {
       />
     </form>
   );
+};
+
+Formulario.propTypes = {
+  guardarGasto: PropTypes.func.isRequired,
+  guardarCrearGasto: PropTypes.func.isRequired,
 };
 
 export default Formulario;
